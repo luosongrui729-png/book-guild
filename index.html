@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Oracle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Crimson Pro"', 'serif'],
+              sans: ['"Inter"', 'sans-serif'],
+            },
+            colors: {
+              paper: {
+                50: '#fdfbf7',
+                100: '#f5f2eb',
+                200: '#e6e0d2',
+                300: '#d6ccb8',
+                400: '#c5baa6',
+                800: '#5c5446',
+                900: '#453f34',
+              },
+              ink: '#2c2925',
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.8s ease-out forwards',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+              'page-flip': 'pageFlip 1.5s infinite ease-in-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              pageFlip: {
+                '0%': { transform: 'rotateY(0deg)', opacity: '1' },
+                '20%': { opacity: '1' },
+                '50%': { transform: 'rotateY(-160deg)', opacity: '0.8' },
+                '100%': { transform: 'rotateY(-180deg)', opacity: '0' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #f5f2eb;
+        color: #2c2925;
+      }
+      .book-shadow {
+        box-shadow: 
+          0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+          0 2px 4px -1px rgba(0, 0, 0, 0.06),
+          0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      /* Custom scrollbar for text areas */
+      textarea::-webkit-scrollbar {
+        width: 8px;
+      }
+      textarea::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      textarea::-webkit-scrollbar-thumb {
+        background-color: #d6ccb8;
+        border-radius: 4px;
+      }
+
+      /* 3D Book Styles */
+      .perspective-1000 {
+        perspective: 1500px;
+      }
+      .transform-style-3d {
+        transform-style: preserve-3d;
+      }
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+      
+      /* Full Page Flip Animation */
+      .flipping-page {
+        transform-origin: left center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%; /* Start from spine */
+        width: 50%;
+        background: linear-gradient(to right, #e6e0d2 0%, #fdfbf7 10%, #fdfbf7 100%);
+        border: 1px solid #d6ccb8;
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+        z-index: 10;
+        transform-style: preserve-3d;
+      }
+
+      .flipping-page-1 { animation: pageFlip 2s infinite ease-in-out; animation-delay: 0s; z-index: 20; }
+      .flipping-page-2 { animation: pageFlip 2s infinite ease-in-out; animation-delay: 0.3s; z-index: 19; }
+      .flipping-page-3 { animation: pageFlip 2s infinite ease-in-out; animation-delay: 0.6s; z-index: 18; }
+
+      @media (max-width: 768px) {
+        .flipping-page {
+          left: 0;
+          width: 100%;
+          border-left: 1px solid #d6ccb8;
+          border-radius: 8px;
+          transform-origin: center left;
+        }
+      }
+
+      @keyframes pageFlip {
+        0% { transform: rotateY(0deg); opacity: 1; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+        30% { box-shadow: -10px 10px 20px rgba(0,0,0,0.15); }
+        100% { transform: rotateY(-140deg); opacity: 0; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.32.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.1/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.559.0",
+    "react/": "https://esm.sh/react@^19.2.1/",
+    "react": "https://esm.sh/react@^19.2.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
